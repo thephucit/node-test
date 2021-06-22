@@ -16,10 +16,12 @@ if (cluster.isMaster) {
     });
 } else {
     http.createServer((sol, res) => {
-        setTimeout(() => {
-            res.end('Hi, we are harnessing the power of clusters: ' + process.pid);
-            console.log('Hi, we are harnessing the power of clusters: ' + process.pid);
-        }, 3000);
+        var r = 0;
+        for (let i = 0; i<= 100000; i++) {
+            r += i;
+        }
+        res.end('Hi, we are harnessing the power of clusters: ' + process.pid);
+        console.log('Hi, we are harnessing the power of clusters: ' + process.pid);
     }).listen(3000, () => console.log('The server is running on the port:3000'));
     console.log(`The Worker number: ${cluster.worker.id} is running`);
 }
